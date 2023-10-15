@@ -39,5 +39,30 @@
 
   render(booksSource);
     
+  const favouriteBooks = [];
+  
+  const initActions = function() {
     
+    const booksImages = getElem.dom.booksList.querySelectorAll('li .book__image'); //obrazek ksiazki w liscie w ul books-list
+    console.log('bookImage',booksImages);
+
+    for (let elem of booksImages){
+      elem.addEventListener('dblclick', function(event){
+        event.preventDefault();
+
+        elem.classList.add('favourite');
+
+        const dataId = elem.getAttribute('data-id');
+        console.log('data-id:',dataId);
+
+        favouriteBooks.push(dataId);
+        console.log('favouriteBooks',favouriteBooks);
+      });
+        
+    }
+    
+  };
+
+  initActions();
+
 }
