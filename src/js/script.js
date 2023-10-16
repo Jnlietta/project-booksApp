@@ -43,20 +43,30 @@
   
   const initActions = function() {
     
-    const booksImages = getElem.dom.booksList.querySelectorAll('li .book__image'); //obrazek ksiazki w liscie w ul books-list
-    console.log('bookImage',booksImages);
+    //   const booksImages = getElem.dom.booksList.querySelectorAll('li .book__image'); //obrazek ksiazki w liscie w ul books-list
+    //   console.log('bookImage',booksImages);
 
-    for (let elem of booksImages){
-      elem.addEventListener('dblclick', function(event){
-        event.preventDefault();
+    getElem.dom.booksList.addEventListener('dblclick', function(event){
+      event.preventDefault();
 
-        //get attribute data-id from clicked elem
-        const dataId = elem.getAttribute('data-id');
-        console.log('data-id:',dataId);
+      //reference to clicked element link DOM as before as elem
+      const clickedElement = event.target.offsetParent;
+      console.log('clickedElement',clickedElement);
+      const  elem = clickedElement;
+        
+      //get attribute data-id from clicked elem
+      const dataId = elem.getAttribute('data-id');
+      console.log('data-id:',dataId);
 
+      //check if clicked element contain class 'book__image' as before in elem of booksImages
+      if(elem.classList.contains('book__image')){ 
+      //for (let elem of booksImages){
+      
+        //get attribute class from elem and make const about it
         const classElem = elem.getAttribute('class');
-        console.log(classElem);
+        console.log('class of elem',classElem);
 
+        //check if class of elem is not equal to 'book__image favorite'
         if(classElem!='book__image favorite'){
         //add class favorite to clicked elem
           elem.classList.add('favorite');
@@ -64,7 +74,6 @@
           //add dataId to array favoriteBooks
           favoriteBooks.push(dataId);
         
-
         } else {
     
           //remove class favorite from clicked element
@@ -77,13 +86,10 @@
           favoriteBooks.splice(indexOfDataId,1);
         
         }
-
         console.log('favoriteBooks',favoriteBooks);
+      }
 
-      });
-
-    }
-
+    });
   };
 
 
