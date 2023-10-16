@@ -13,9 +13,11 @@
 
   getElem.dom.booksList = document.querySelector('.books-list');
   getElem.dom.template = document.querySelector('#template-book');
+  getElem.dom.formFilters = document.querySelector('.filters'); //reference to form with class 'filters'
 
   //console.log('booksList:',getElem.dom.booksList);
   //console.log('DOM template',getElem.dom.template);
+  console.log('form Filters',getElem.dom.formFilters);
 
   const booksSource = dataSource.books;
   //console.log('booksSource',booksSource);
@@ -40,7 +42,8 @@
   render(booksSource);
     
   const favoriteBooks = [];
-  
+  const filters = [];
+
   const initActions = function() {
     
     //   const booksImages = getElem.dom.booksList.querySelectorAll('li .book__image'); //obrazek ksiazki w liscie w ul books-list
@@ -90,9 +93,38 @@
       }
 
     });
+
+    getElem.dom.formFilters.addEventListener('click', function(event) {
+        
+      const clickedElement = event.target;
+      //console.log('clickedElement',clickedElement);
+        
+      if(clickedElement.tagName == 'INPUT' 
+            && clickedElement.type == 'checkbox'
+            && clickedElement.name == 'filter'){
+
+        //show in console value of clicked input
+        const value = clickedElement.value;
+        console.log('clickedElement value:',value);
+            
+        if(clickedElement.checked == true){
+          //add value of clicked element to array filters
+          filters.push(value);
+        
+        } else {
+          //get the index of clicked element 'value' from array filters
+          const indexOfValue = filters.indexOf(value);
+
+          //remove the index from array
+          filters.splice(indexOfValue,1);
+        }
+
+        console.log('filters array:',filters);
+      }
+        
+    });
   };
 
   initActions();
   
-
 }
