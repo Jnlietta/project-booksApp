@@ -44,6 +44,33 @@
   const favoriteBooks = [];
   const filters = [];
 
+  const filterBooks = function() {
+
+    for(const book of dataSource.books){ 
+
+      const bookDetails = book.details;
+      const bookId = book.id;
+      let shouldBeHidden = false;
+
+      for(const filter of filters){ 
+            
+        if(!bookDetails[filter]){
+          shouldBeHidden = true;
+          break; //przerwanie petli, bo dalej nie trzeba sprawdzac
+        }
+      }
+            
+      const hiddenElementSelector = '.book__image[data-id="'+ bookId +'"]';
+      const hiddenElement = getElem.dom.booksList.querySelector(hiddenElementSelector);    
+
+      if(shouldBeHidden == true){
+        hiddenElement.classList.add('hidden');
+      } else {
+        hiddenElement.classList.remove('hidden');
+      }
+    }
+  };
+
   const initActions = function() {
     
     //   const booksImages = getElem.dom.booksList.querySelectorAll('li .book__image'); //obrazek ksiazki w liscie w ul books-list
@@ -120,8 +147,10 @@
         }
 
         console.log('filters array:',filters);
+
+        filterBooks();
       }
-        
+
     });
   };
 
