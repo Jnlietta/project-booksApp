@@ -6,7 +6,7 @@
   thisApp.data = dataSource;
   const getElem = {};
 
-  console.log('thisApp',thisApp);
+  //console.log('thisApp',thisApp);
 
   //referances
   getElem.dom = {};
@@ -39,15 +39,15 @@
       //console.log('bookData',bookData);
 
       const ratingBgc = determineRatingBgc(bookData.rating);
-      console.log('ratingBgc',ratingBgc);
+      //console.log('ratingBgc',ratingBgc);
 
       const ratingPercentage = bookData.rating * 10;
       const ratingWidth = ratingPercentage.toString();
-      console.log('ratingWidth',ratingWidth);
+      //console.log('ratingWidth',ratingWidth);
 
       bookData.ratingBgc = ratingBgc;
       bookData.ratingWidth = ratingWidth;
-      console.log('bookData',bookData);
+      //console.log('bookData',bookData);
 
       const  generatedHTML = template(bookData);
       //console.log('generated HTML',generatedHTML); //szablon z podstawionymi danymi ksiazki jako string
