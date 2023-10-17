@@ -17,7 +17,7 @@
 
   //console.log('booksList:',getElem.dom.booksList);
   //console.log('DOM template',getElem.dom.template);
-  console.log('form Filters',getElem.dom.formFilters);
+  //console.log('form Filters',getElem.dom.formFilters);
 
   const booksSource = dataSource.books;
   //console.log('booksSource',booksSource);
@@ -25,9 +25,29 @@
   const template = Handlebars.compile(document.querySelector('#template-book').innerHTML);
   //console.log('template', template);
 
+  const determineRatingBgc = function(rating){
+
+    if(rating < 6){return 'linear-gradient(to bottom,  #fefcea 0%, #f1da36 100%)';}
+    if(rating > 6 && rating<= 8){return 'linear-gradient(to bottom, #b4df5b 0%,#b4df5b 100%)';}
+    if(rating > 8 && rating<= 9){return 'linear-gradient(to bottom, #299a0b 0%, #299a0b 100%)';}
+    if(rating > 9){return 'linear-gradient(to bottom, #ff0084 0%,#ff0084 100%)';}
+
+  };
+
   const render = function(booksArray) {
     for(let bookData of booksArray){ 
       //console.log('bookData',bookData);
+
+      const ratingBgc = determineRatingBgc(bookData.rating);
+      console.log('ratingBgc',ratingBgc);
+
+      const ratingPercentage = bookData.rating * 10;
+      const ratingWidth = ratingPercentage.toString();
+      console.log('ratingWidth',ratingWidth);
+
+      bookData.ratingBgc = ratingBgc;
+      bookData.ratingWidth = ratingWidth;
+      console.log('bookData',bookData);
 
       const  generatedHTML = template(bookData);
       //console.log('generated HTML',generatedHTML); //szablon z podstawionymi danymi ksiazki jako string
