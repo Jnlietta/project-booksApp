@@ -185,8 +185,6 @@
     }
   }
   
-  const app = new BooksList();
-
-  app;
+  new BooksList();
 
 }
